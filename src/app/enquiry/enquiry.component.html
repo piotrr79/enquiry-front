@@ -1,0 +1,53 @@
+
+<!-- Resources -->
+<h2>Enquiry Form</h2>
+<p>Please fill in fields below to order TAXI:</p>
+
+<div class="card-container">
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <span class="text-danger"> {{ errors.name ? errors.name : null }} </span>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="enquiry.name" name="name" maxlength="255" (change)="checkErrors()">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Mobile:</label>
+      <span class="text-danger"> {{ errors.mobile ? errors.mobile : null }} </span>
+      <input type="text" class="form-control" id="mobile" placeholder="07xxx xxxxxx" required [(ngModel)]="enquiry.mobile" name="mobile" maxlength="16" (change)="checkErrors()">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Arrival Date:</label>
+      <span class="text-danger"> {{ errors.arrival_date ? errors.arrival_date : null }} </span>
+      <input type="date" class="form-control" id="arrival_date" placeholder="yyyy-mm-dd" required [(ngModel)]="enquiry.arrival_date" name="arrival_date" (change)="checkErrors()">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Airport:</label>
+      <select class="form-control" id="airport" nglFormControl [(ngModel)]="enquiry.airport" (change)="airportSwitcher(enquiry.airport)">
+        <option [value]="null" disabled></option>
+        <option *ngFor="let airport of airport_choice" [value]="airport" name="airport">{{airport}}</option>
+      </select>
+    </div>
+
+    <span *ngIf="(airport_checked === true)" >
+      <div class="form-group">
+        <label for="name">Terminal:</label>
+        <select class="form-control" id="airport" nglFormControl [(ngModel)]="enquiry.terminal">
+          <option *ngFor="let terminal of terminals" [value]="terminal" (change)="checkErrors">{{terminal}}</option>
+        </select>
+      </div>
+    </span>
+
+    <div class="form-group">
+      <label for="name">Flight Number:</label>
+      <span class="text-danger"> {{ errors.flight_number ? errors.flight_number : null }} </span>
+      <input type="text" class="form-control" id="flight_number" placeholder="AA111" required [(ngModel)]="enquiry.flight_number" name="flight_number" maxlength="11" (change)="checkErrors()">
+    </div>
+
+    <div class="form-group">
+      <button type="button" nglButton="neutral" class="btn btn-primary" id="save-button" (click)="saveInfos()">Save</button>
+    </div>
+
+</div>
